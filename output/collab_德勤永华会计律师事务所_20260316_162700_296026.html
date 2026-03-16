@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上海算酷信息科技有限公司 × 德勤永华会计律师事务所 战略合作</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a2a4a;
+      --secondary: #2c3e50;
+      --accent: #d4af37;
+      --bg: #f8f9fa;
+      --bg-card: #ffffff;
+      --text: #1a1a2e;
+      --text-muted: #6c757d;
+      --gradient: linear-gradient(135deg, #1a2a4a 0%, #2c3e50 50%, #1a2a4a 100%);
+      --navbar-rgb: 26, 42, 74;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Playfair Display:wght@400;600;700", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── Navbar ─────────────────────────────────────────── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(var(--navbar-rgb), 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 16px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--bg-card);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .navbar-brand .dot {
+      width: 8px; height: 8px; background: var(--accent);
+      border-radius: 50%;
+    }
+    .navbar-nav {
+      display: flex; gap: 32px;
+      list-style: none;
+    }
+    .navbar-nav a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .navbar-nav a:hover { color: #fff; }
+
+    /* ── Hero Section ───────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background: var(--gradient);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.6;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .hero h1 .highlight {
+      display: block;
+      font-size: 0.5em;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-top: 8px;
+    }
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.9);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    .hero-companies {
+      display: flex; justify-content: center; align-items: center; gap: 20px;
+      flex-wrap: wrap;
+    }
+    .hero-company {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 16px 28px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .hero-company span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-bottom: 4px;
+    }
+
+    /* ── Section Base ───────────────────────────────────── */
+    .section {
+      padding: 80px 24px;
+    }
+    .section-alt { background: var(--bg-card); }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* ── Party Cards ────────────────────────────────────── */
+    .party-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+    .party-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .party-card-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .party-icon {
+      width: 52px; height: 52px;
+      background: var(--gradient);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+    .party-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .party-card h3 small {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .party-overview {
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+    .party-meta {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .party-meta-item {
+      background: rgba(var(--navbar-rgb), 0.08);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* ── AI Product ─────────────────────────────────────── */
+    .ai-section {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-card) 100%);
+    }
+    .product-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .product-showcase { grid-template-columns: 1fr; }
+    }
+    .product-info h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .product-info p {
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+    .feature-list {
+      list-style: none;
+    }
+    .feature-list li {
+      display: flex; gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .feature-list li:last-child { border-bottom: none; }
+    .feature-icon {
+      width: 40px; height: 40px;
+      background: var(--gradient);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+    .feature-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .feature-content p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .advantages-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+    .advantages-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .advantage-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0;
+    }
+    .advantage-item .check {
+      width: 20px; height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .advantage-item .check::after {
+      content: '✓';
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .advantage-item span {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* ── Scenarios ──────────────────────────────────────── */
+    .scenarios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .scenario-card {
+      background: var(--bg-card);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .scenario-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+    .scenario-header {
+      background: var(--gradient);
+      padding: 24px;
+      color: #fff;
+    }
+    .scenario-header h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .scenario-header p {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+    .scenario-body {
+      padding: 24px;
+    }
+    .scenario-pain {
+      margin-bottom: 16px;
+    }
+    .scenario-pain h5 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .scenario-pain ul {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .scenario-pain li {
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+    .scenario-pain li::before {
+      content: '•';
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
+    .scenario-solution {
+      background: rgba(var(--navbar-rgb), 0.05);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .scenario-solution h5 {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .scenario-solution p {
+      font-size: 13px;
+      color: var(--text);
+      margin: 0;
+    }
+    .scenario-value {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* ── Cooperation Model ──────────────────────────────── */
+    .model-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .model-grid { grid-template-columns: 1fr; }
+    }
+    .model-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .model-icon {
+      width: 56px; height: 56px;
+      background: var(--gradient);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 26px;
+    }
+    .model-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .model-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* ── Results ────────────────────────────────────────── */
+    .results-banner {
+      background: var(--gradient);
+      border-radius: 24px;
+      padding: 48px;
+      text-align: center;
+      color: #fff;
+    }
+    .results-banner h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+    .results-metrics {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .metric-item {
+      text-align: center;
+    }
+    .metric-value {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .metric-label {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    /* ── Roadmap ────────────────────────────────────────── */
+    .roadmap {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      padding: 0 20px;
+    }
+    .roadmap::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: 60px;
+      right: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      .roadmap { flex-direction: column; gap: 24px; }
+      .roadmap::before { display: none; }
+    }
+    .roadmap-item {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .roadmap-dot {
+      width: 60px; height: 60px;
+      background: var(--bg-card);
+      border: 4px solid var(--primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .roadmap-item h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .roadmap-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    .footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.9);
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .footer .date {
+      font-size: 12px;
+      opacity: 0.7;
+    }
+
+    /* ── Utilities ──────────────────────────────────────── */
+    .text-center { text-align: center; }
+    .mt-4 { margin-top: 32px; }
+    .mb-4 { margin-bottom: 32px; }
+
+    @media (max-width: 600px) {
+      .navbar { padding: 12px 20px; }
+      .navbar-nav { display: none; }
+      .section { padding: 60px 16px; }
+      .hero { padding: 100px 16px 60px; }
+      .party-card { padding: 24px; }
+      .results-banner { padding: 32px 20px; }
+      .results-metrics { gap: 24px; }
+      .metric-value { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <span class="dot"></span>
+      上海算酷信息科技有限公司 × 德勤永华会计律师事务所
+    </div>
+    <ul class="navbar-nav">
+      <li><a href="#about">关于双方</a></li>
+      <li><a href="#product">AI 产品</a></li>
+      <li><a href="#scenarios">合作场景</a></li>
+      <li><a href="#roadmap">合作路线</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">战略合作</div>
+      <h1>
+        上海算酷信息科技有限公司 × 德勤永华会计律师事务所
+        <span class="highlight">AI 赋能 · 智创未来</span>
+      </h1>
+      <p>通过AI技术提升法律服务效率，降低企业运营成本，实现双方共赢。</p>
+      <div class="hero-companies">
+        <div class="hero-company">
+          <span>AI 技术提供方</span>
+          上海算酷信息科技有限公司
+        </div>
+        <div class="hero-company">
+          <span>行业合作伙伴</span>
+          德勤永华会计律师事务所
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section section-alt" id="about">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">About Partners</div>
+        <h2 class="section-title">关于合作双方</h2>
+      </div>
+
+      <div class="party-grid">
+        <!-- Party A -->
+        <div class="party-card">
+          <div class="party-card-header">
+            <div class="party-icon">🤖</div>
+            <h3>
+              上海算酷信息科技有限公司
+              <small>AI 技术提供方</small>
+            </h3>
+          </div>
+          <p class="party-overview">上海算酷信息科技有限公司成立于2015年，是一家专注于人工智能与大数据技术的高科技企业。公司以技术创新为核心，致力于为客户提供智能问答、自动化报告、智能分析等AI解决方案。经过多年发展，算酷信息已成为国内领先的AI技术服务提供商，市场占有率位居行业前列。</p>
+          
+          <div class="party-meta">
+            <div class="party-meta-item">愿景：成为全球领先的AI技术服务商，赋能各行业智能升级。</div>
+          </div>
+          
+        </div>
+
+        <!-- Party B -->
+        <div class="party-card">
+          <div class="party-card-header">
+            <div class="party-icon">🏢</div>
+            <h3>
+              德勤永华会计律师事务所
+              <small>行业合作伙伴</small>
+            </h3>
+          </div>
+          <p class="party-overview">德勤永华会计律师事务所成立于1985年，是一家提供综合性法律服务的大型律师事务所。公司拥有超过2000名员工，分支机构遍布全国，为各类客户提供全方位、专业的法律服务，是行业内具有重要影响力的法律服务提供商。</p>
+          
+          <div class="party-meta">
+            <div class="party-meta-item">规模：拥有超过2000名员工，分支机构遍布全国，业务覆盖法律、会计、审计等多个领域。</div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Product Section -->
+  <section class="section ai-section" id="product">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">AI Product</div>
+        <h2 class="section-title">绿地智能问答+自动化周报</h2>
+      </div>
+
+      <div class="product-showcase">
+        <div class="product-info">
+          <h3>绿地智能问答+自动化周报</h3>
+          <p>绿地智能问答+自动化周报是一款基于自然语言处理和机器学习技术的AI产品，能够实现快速构建问答系统，自动化生成周报，帮助企业提高信息处理效率和决策质量。</p>
+
+          
+          <ul class="feature-list">
+            
+            <li>
+              <div class="feature-icon">⚡</div>
+              <div class="feature-content">
+                <h4>智能问答</h4>
+                <p>通过自然语言处理技术，实现高效、准确的智能问答服务，提升客户服务体验。</p>
+              </div>
+            </li>
+            
+            <li>
+              <div class="feature-icon">⚡</div>
+              <div class="feature-content">
+                <h4>自动化周报</h4>
+                <p>基于用户数据和业务需求，自动化生成周报，提高信息汇总效率。</p>
+              </div>
+            </li>
+            
+            <li>
+              <div class="feature-icon">⚡</div>
+              <div class="feature-content">
+                <h4>数据分析</h4>
+                <p>对用户行为和业务数据进行分析，为企业提供决策支持。</p>
+              </div>
+            </li>
+            
+            <li>
+              <div class="feature-icon">⚡</div>
+              <div class="feature-content">
+                <h4>系统集成</h4>
+                <p>支持与企业现有系统的无缝集成，保障数据安全和业务连续性。</p>
+              </div>
+            </li>
+            
+          </ul>
+          
+        </div>
+
+        <div class="advantages-card">
+          <h4>🎯 核心优势</h4>
+          
+            
+            <div class="advantage-item">
+              <div class="check"></div>
+              <span>快速部署</span>
+            </div>
+            
+            <div class="advantage-item">
+              <div class="check"></div>
+              <span>易于使用</span>
+            </div>
+            
+            <div class="advantage-item">
+              <div class="check"></div>
+              <span>高精度识别</span>
+            </div>
+            
+            <div class="advantage-item">
+              <div class="check"></div>
+              <span>定制化服务</span>
+            </div>
+            
+          
+
+          
+          <div class="mt-4" style="padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.08);">
+            <h4 style="margin-bottom: 12px;">👨‍💻 研发团队</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0;">研发团队由博士、硕士等高学历人才组成，拥有丰富的AI技术研发经验和行业应用案例。</p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Party B Business -->
+  
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Business</div>
+        <h2 class="section-title">德勤永华会计律师事务所 业务板块</h2>
+      </div>
+
+      <div class="party-grid">
+        
+        <div class="party-card">
+          <div class="party-card-header">
+            <div class="party-icon">📊</div>
+            <h3>法律服务</h3>
+          </div>
+          <p class="party-overview">提供各类法律服务，包括但不限于公司法、证券法、劳动法等，服务对象涵盖各类企业及个人。</p>
+          
+          <div class="party-meta">
+            <div class="party-meta-item">目标客户：各类企业及个人</div>
+          </div>
+          
+        </div>
+        
+        <div class="party-card">
+          <div class="party-card-header">
+            <div class="party-icon">📊</div>
+            <h3>会计服务</h3>
+          </div>
+          <p class="party-overview">提供会计审计、税务筹划等会计服务，满足客户在财务方面的需求。</p>
+          
+          <div class="party-meta">
+            <div class="party-meta-item">目标客户：各类企业及个人</div>
+          </div>
+          
+        </div>
+        
+        <div class="party-card">
+          <div class="party-card-header">
+            <div class="party-icon">📊</div>
+            <h3>合规服务</h3>
+          </div>
+          <p class="party-overview">提供合规咨询、风险评估等服务，协助客户应对法律、财务、合规等方面的挑战。</p>
+          
+          <div class="party-meta">
+            <div class="party-meta-item">目标客户：各类企业及个人</div>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Scenarios Section -->
+  <section class="section" id="scenarios">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Cooperation</div>
+        <h2 class="section-title">AI 合作应用场景</h2>
+      </div>
+
+      <div class="scenarios-grid">
+        
+        <div class="scenario-card">
+          <div class="scenario-header">
+            <h4>场景1：智能客服升级</h4>
+            <p>当前客服系统存在响应速度慢、知识库更新不及时等问题。</p>
+          </div>
+          <div class="scenario-body">
+            
+            <div class="scenario-pain">
+              <h5>痛点分析</h5>
+              <ul>
+                
+                <li>响应速度慢</li>
+                
+                <li>知识库更新不及时</li>
+                
+                <li>客服人员工作量过大</li>
+                
+              </ul>
+            </div>
+            
+
+            <div class="scenario-solution">
+              <h5>AI 解决方案</h5>
+              <p>部署绿地智能问答系统，实现自动回答客户咨询，提高响应速度；自动化生成知识库更新周报，确保知识库的及时更新。</p>
+            </div>
+
+            
+            <div class="scenario-value">📈 响应速度提升50%，人工成本降低30%，客户满意度提高20%。</div>
+            
+          </div>
+        </div>
+        
+        <div class="scenario-card">
+          <div class="scenario-header">
+            <h4>场景2：智能内容生成</h4>
+            <p>报告撰写周期长，内容质量参差不齐。</p>
+          </div>
+          <div class="scenario-body">
+            
+            <div class="scenario-pain">
+              <h5>痛点分析</h5>
+              <ul>
+                
+                <li>报告撰写周期长</li>
+                
+                <li>内容质量参差不齐</li>
+                
+                <li>人工成本高</li>
+                
+              </ul>
+            </div>
+            
+
+            <div class="scenario-solution">
+              <h5>AI 解决方案</h5>
+              <p>利用AI技术自动生成各类报告，提高报告撰写效率和质量。</p>
+            </div>
+
+            
+            <div class="scenario-value">📈 报告撰写时间缩短50%，内容质量提高30%，人工成本降低20%。</div>
+            
+          </div>
+        </div>
+        
+        <div class="scenario-card">
+          <div class="scenario-header">
+            <h4>场景3：智能数据分析</h4>
+            <p>缺乏有效的数据分析工具，无法准确把握业务动态。</p>
+          </div>
+          <div class="scenario-body">
+            
+            <div class="scenario-pain">
+              <h5>痛点分析</h5>
+              <ul>
+                
+                <li>数据分析工具缺乏</li>
+                
+                <li>业务动态把握不准</li>
+                
+                <li>决策支持不足</li>
+                
+              </ul>
+            </div>
+            
+
+            <div class="scenario-solution">
+              <h5>AI 解决方案</h5>
+              <p>通过AI技术对业务数据进行实时分析，为企业提供精准的业务洞察。</p>
+            </div>
+
+            
+            <div class="scenario-value">📈 业务洞察准确性提高40%，决策支持有效性提升30%。</div>
+            
+          </div>
+        </div>
+        
+        <div class="scenario-card">
+          <div class="scenario-header">
+            <h4>场景4：智能运营优化</h4>
+            <p>运营效率低，资源利用率不高。</p>
+          </div>
+          <div class="scenario-body">
+            
+            <div class="scenario-pain">
+              <h5>痛点分析</h5>
+              <ul>
+                
+                <li>运营效率低</li>
+                
+                <li>资源利用率不高</li>
+                
+                <li>成本控制难度大</li>
+                
+              </ul>
+            </div>
+            
+
+            <div class="scenario-solution">
+              <h5>AI 解决方案</h5>
+              <p>利用AI技术对运营数据进行智能分析，优化资源配置，提高运营效率。</p>
+            </div>
+
+            
+            <div class="scenario-value">📈 运营效率提升30%，资源利用率提高20%，成本降低15%。</div>
+            
+          </div>
+        </div>
+        
+        <div class="scenario-card">
+          <div class="scenario-header">
+            <h4>场景5：智能决策支持</h4>
+            <p>缺乏科学的决策支持体系，决策风险较高。</p>
+          </div>
+          <div class="scenario-body">
+            
+            <div class="scenario-pain">
+              <h5>痛点分析</h5>
+              <ul>
+                
+                <li>决策支持体系不完善</li>
+                
+                <li>决策风险高</li>
+                
+                <li>业务发展受限</li>
+                
+              </ul>
+            </div>
+            
+
+            <div class="scenario-solution">
+              <h5>AI 解决方案</h5>
+              <p>利用AI技术为企业提供科学、精准的决策支持。</p>
+            </div>
+
+            
+            <div class="scenario-value">📈 决策准确性提高25%，决策风险降低20%，业务发展提速15%。</div>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Cooperation Model -->
+  
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Model</div>
+        <h2 class="section-title">合作模式</h2>
+      </div>
+
+      <div class="model-grid">
+        <div class="model-card">
+          <div class="model-icon">🔗</div>
+          <h4>技术对接</h4>
+          <p>采用API对接方式，实现双方系统的无缝集成。</p>
+        </div>
+        <div class="model-card">
+          <div class="model-icon">🔒</div>
+          <h4>数据安全</h4>
+          <p>采用数据加密、脱敏等技术，确保数据安全。</p>
+        </div>
+        <div class="model-card">
+          <div class="model-icon">🤝</div>
+          <h4>联合研发</h4>
+          <p>建立联合研发团队，定期沟通、迭代更新产品功能。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Expected Results -->
+  
+  <section class="section">
+    <div class="container">
+      <div class="results-banner">
+        <h3>预期合作成果</h3>
+        <div class="results-metrics">
+          
+          <div class="metric-item">
+            <div class="metric-value">效率提升30%</div>
+            <div class="metric-label">效率提升</div>
+          </div>
+          
+          
+          <div class="metric-item">
+            <div class="metric-value">成本降低20%</div>
+            <div class="metric-label">成本优化</div>
+          </div>
+          
+          
+          <div class="metric-item">
+            <div class="metric-value">业务增长15%</div>
+            <div class="metric-label">业务增长</div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Roadmap -->
+  
+  <section class="section section-alt" id="roadmap">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Roadmap</div>
+        <h2 class="section-title">合作路线图</h2>
+      </div>
+
+      <div class="roadmap">
+        <div class="roadmap-item">
+          <div class="roadmap-dot">🚀</div>
+          <h4>短期目标</h4>
+          <p>完成AI系统部署，实现初步应用。</p>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot">📈</div>
+          <h4>中期目标</h4>
+          <p>完善AI系统功能，实现全面应用。</p>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot">🎯</div>
+          <h4>长期愿景</h4>
+          <p>建立长期合作机制，共同开拓市场。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>上海算酷信息科技有限公司 × 德勤永华会计律师事务所 战略合作</p>
+    <p class="date">本页面由 AI 自动生成 · 2026年03月16日</p>
+  </footer>
+
+</body>
+</html>

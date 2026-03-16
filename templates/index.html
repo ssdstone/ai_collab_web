@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 合作介绍生成器</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #08090d;
+    --surface:   #0f1117;
+    --surface2:  #161820;
+    --border:    rgba(255,255,255,0.07);
+    --accent:    #6c63ff;
+    --accent2:   #00d4aa;
+    --text:      #f0f0f5;
+    --muted:     #6b6e80;
+    --danger:    #ff5f6d;
+    --radius:    14px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Background mesh ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 10% 10%,  rgba(108,99,255,.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 80%,  rgba(0,212,170,.09) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 50% 50%,  rgba(255,95,109,.05) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── Layout ── */
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+
+  /* ── Header ── */
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+    animation: fadeUp .7s ease both;
+  }
+  .logo-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(108,99,255,.15);
+    border: 1px solid rgba(108,99,255,.3);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 12px; font-weight: 500; letter-spacing: .08em;
+    color: #a89fff;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .logo-chip span { width:6px; height:6px; border-radius:50%; background:var(--accent2); display:inline-block; animation: pulse 2s infinite; }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 30%, #a89fff 70%, var(--accent2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  header p {
+    color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 500px; margin: 0 auto;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    animation: fadeUp .7s ease .1s both;
+  }
+
+  /* ── Section labels ── */
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  /* ── Form ── */
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .field-grid.single { grid-template-columns: 1fr; }
+  @media(max-width:600px){ .field-grid { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  label { font-size: 13px; font-weight: 500; color: #ccc; }
+  label span { color: var(--danger); margin-left:2px; }
+
+  input, textarea {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+    width: 100%;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: rgba(108,99,255,.5);
+    box-shadow: 0 0 0 3px rgba(108,99,255,.12);
+  }
+  select {
+    background: var(--surface2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b6e80' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E") no-repeat right 14px center;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 40px 12px 16px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+    width: 100%;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+
+  /* API key row */
+  .api-row {
+    display:flex; align-items:center; gap:10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0 14px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .api-row:focus-within {
+    border-color: rgba(108,99,255,.5);
+    box-shadow: 0 0 0 3px rgba(108,99,255,.12);
+  }
+  .api-row input { background:transparent; border:none; box-shadow:none; padding:12px 0; flex:1; }
+  .api-row input:focus { box-shadow:none; }
+  .toggle-key {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); padding: 4px; display:flex; align-items:center;
+    transition: color .2s;
+  }
+  .toggle-key:hover { color: var(--text); }
+
+  /* divider */
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  /* ── Submit ── */
+  .btn-generate {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--accent), #9b59f5);
+    border: none; border-radius: 10px;
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: .04em;
+    cursor: pointer;
+    transition: opacity .2s, transform .15s, box-shadow .2s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-generate:hover:not(:disabled) { opacity:.9; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(108,99,255,.3); }
+  .btn-generate:active:not(:disabled) { transform: translateY(0); }
+  .btn-generate:disabled { opacity:.5; cursor:not-allowed; }
+
+  /* ── Loader ── */
+  #loader {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    animation: fadeUp .4s ease both;
+  }
+  .spinner {
+    width: 44px; height: 44px;
+    border: 3px solid rgba(108,99,255,.2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+  }
+  #loader p { color: var(--muted); font-size: 14px; }
+
+  /* ── Result panel ── */
+  #result {
+    display: none;
+    margin-top: 32px;
+    animation: fadeUp .5s ease both;
+  }
+  .result-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .result-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--accent2);
+  }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; border: none;
+    transition: all .2s;
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { background: var(--surface2); border-color: rgba(255,255,255,.15); }
+  .btn-primary {
+    background: var(--accent2);
+    color: #08090d;
+  }
+  .btn-primary:hover { opacity:.88; transform:translateY(-1px); }
+  .btn-danger-outline {
+    background: transparent;
+    border: 1px solid rgba(255,95,109,.3);
+    color: var(--danger);
+  }
+  .btn-danger-outline:hover { background: rgba(255,95,109,.08); }
+
+  /* ── Preview frame ── */
+  .preview-wrap {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #fff;
+  }
+  .preview-toolbar {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dot { width:10px; height:10px; border-radius:50%; }
+  .dot.r { background:#ff5f6d; } .dot.y { background:#ffbe2e; } .dot.g { background:#24ca6d; }
+  .preview-url {
+    flex:1; background:var(--surface); border:1px solid var(--border);
+    border-radius:6px; padding:4px 10px; font-size:12px; color:var(--muted);
+    margin-left: 8px;
+  }
+  iframe#preview {
+    width: 100%; height: 680px;
+    border: none; display: block;
+  }
+
+  /* ── Error ── */
+  .error-box {
+    display: none;
+    background: rgba(255,95,109,.08);
+    border: 1px solid rgba(255,95,109,.25);
+    border-radius: 10px;
+    padding: 16px 20px;
+    color: #ff8f96;
+    font-size: 14px;
+    margin-top: 16px;
+    animation: fadeUp .3s ease both;
+  }
+
+  /* ── Tips ── */
+  .tips {
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: rgba(108,99,255,.06);
+    border: 1px solid rgba(108,99,255,.15);
+    border-radius: var(--radius);
+    font-size: 13px; color: var(--muted); line-height: 1.8;
+    animation: fadeUp .7s ease .2s both;
+  }
+  .tips strong { color: #a89fff; }
+
+  /* ── Keyframes ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  @keyframes pulse {
+    0%,100% { opacity:1; } 50% { opacity:.3; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <header>
+    <div class="logo-chip"><span></span> Powered by DeepSeek / 智谱 AI</div>
+    <h1>AI 合作介绍<br>网页生成器</h1>
+    <p>输入甲乙双方信息，AI 自动生成专业合作介绍页面，风格随乙方行业智能适配</p>
+  </header>
+
+  <!-- Form Card -->
+  <div class="card">
+    <!-- Party A -->
+    <div class="section-label">甲方信息</div>
+    <div class="field-grid">
+      <div class="field">
+        <label>公司名称 <span>*</span></label>
+        <input id="party_a_name" type="text" placeholder="例：阿里云计算有限公司">
+      </div>
+      <div class="field">
+        <label>AI 功能 / 产品描述 <span>*</span></label>
+        <input id="party_a_ai" type="text" placeholder="例：通义千问大模型、智能客服平台">
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Party B -->
+    <div class="section-label">乙方信息</div>
+    <div class="field-grid single">
+      <div class="field">
+        <label>公司名称 <span>*</span></label>
+        <input id="party_b_name" type="text" placeholder="例：德勤华永会计师事务所 / 字节跳动 / 协和医院">
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- API Key -->
+    <div class="section-label">API 配置</div>
+    <div class="field-grid">
+      <div class="field">
+        <label>API 提供商 <span>*</span></label>
+        <select id="provider" onchange="updateProvider()">
+          <option value="deepseek">DeepSeek</option>
+          <option value="zhipu">智谱 AI</option>
+        </select>
+      </div>
+      <div class="field">
+        <label id="apiKeyLabel">DeepSeek API Key <span>*</span></label>
+        <div class="api-row" id="apiRow">
+          <input id="api_key" type="password" placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx">
+          <button class="toggle-key" onclick="toggleKey()" title="显示/隐藏">
+            <svg id="eyeIcon" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:28px;">
+      <button class="btn-generate" id="genBtn" onclick="generate()">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        生成合作介绍网页
+      </button>
+    </div>
+
+    <!-- Error -->
+    <div class="error-box" id="errorBox"></div>
+  </div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <p>AI 正在分析行业特征并生成专属网页，请稍候…</p>
+  </div>
+
+  <!-- Result -->
+  <div id="result">
+    <div class="result-header">
+      <h2>✅ 网页已生成</h2>
+      <div class="actions">
+        <button class="btn btn-outline" onclick="openNewTab()">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+            <polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          新标签预览
+        </button>
+        <button class="btn btn-outline" onclick="downloadFile()">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          下载 HTML
+        </button>
+        <button class="btn btn-danger-outline" onclick="reset()">重新生成</button>
+      </div>
+    </div>
+
+    <!-- Browser-style preview -->
+    <div class="preview-wrap">
+      <div class="preview-toolbar">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="preview-url" id="previewUrl">正在加载…</div>
+      </div>
+      <iframe id="preview" sandbox="allow-scripts allow-same-origin"></iframe>
+    </div>
+  </div>
+
+  <!-- Tips -->
+  <div class="tips">
+    <strong>💡 使用提示</strong><br>
+    乙方名称越具体，AI 越能精准判断行业风格。<br>
+    例如：<em>「德勤华永会计师事务所」→ 商务深色风</em> &nbsp;|&nbsp;
+    <em>「字节跳动」→ 科技感暗色风</em> &nbsp;|&nbsp;
+    <em>「北京协和医院」→ 清洁医疗风</em>
+  </div>
+
+</div>
+
+<script>
+  let currentFilename = '';
+  let currentHtml = '';
+
+  function toggleKey() {
+    const inp = document.getElementById('api_key');
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+  }
+
+  function updateProvider() {
+    const provider = document.getElementById('provider').value;
+    const label = document.getElementById('apiKeyLabel');
+    const input = document.getElementById('api_key');
+    if (provider === 'zhipu') {
+      label.innerHTML = '智谱 API Key <span>*</span>';
+      input.placeholder = '请输入智谱API Key';
+    } else {
+      label.innerHTML = 'DeepSeek API Key <span>*</span>';
+      input.placeholder = 'sk-xxxxxxxxxxxxxxxxxxxxxxxx';
+    }
+  }
+
+  async function generate() {
+    const partyAName = document.getElementById('party_a_name').value.trim();
+    const partyAAI   = document.getElementById('party_a_ai').value.trim();
+    const partyBName = document.getElementById('party_b_name').value.trim();
+    const apiKey     = document.getElementById('api_key').value.trim();
+    const provider   = document.getElementById('provider').value;
+
+    // Validate
+    const errBox = document.getElementById('errorBox');
+    if (!partyAName || !partyAAI || !partyBName || !apiKey) {
+      errBox.textContent = '⚠️ 请填写所有必填字段（包括 API Key）';
+      errBox.style.display = 'block';
+      return;
+    }
+    errBox.style.display = 'none';
+
+    // Show loader, hide result
+    document.getElementById('genBtn').disabled = true;
+    document.getElementById('loader').style.display = 'block';
+    document.getElementById('result').style.display = 'none';
+
+    try {
+      const res = await fetch('/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          party_a_name: partyAName,
+          party_a_ai:   partyAAI,
+          party_b_name: partyBName,
+          api_key:      apiKey,
+          provider:     provider,
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || '未知错误');
+      }
+
+      currentFilename = data.filename;
+      currentHtml     = data.html;
+
+      // Render in iframe
+      const iframe = document.getElementById('preview');
+      const blob   = new Blob([currentHtml], { type: 'text/html' });
+      const url    = URL.createObjectURL(blob);
+      iframe.src   = url;
+      document.getElementById('previewUrl').textContent = `本地预览 — ${currentFilename}`;
+
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    } catch (err) {
+      errBox.textContent = '❌ ' + err.message;
+      errBox.style.display = 'block';
+    } finally {
+      document.getElementById('genBtn').disabled = false;
+      document.getElementById('loader').style.display = 'none';
+    }
+  }
+
+  function openNewTab() {
+    if (!currentHtml) return;
+    const blob = new Blob([currentHtml], { type: 'text/html' });
+    const url  = URL.createObjectURL(blob);
+    window.open(url, '_blank');
+  }
+
+  function downloadFile() {
+    if (!currentFilename) return;
+    const a = document.createElement('a');
+    const blob = new Blob([currentHtml], { type: 'text/html' });
+    a.href = URL.createObjectURL(blob);
+    a.download = currentFilename;
+    a.click();
+  }
+
+  function reset() {
+    document.getElementById('result').style.display = 'none';
+    currentFilename = '';
+    currentHtml = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Enter key support
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && e.ctrlKey) generate();
+  });
+</script>
+</body>
+</html>
